@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef  long long ll;
+typedef vector<ll> vec;
+typedef map<string,int> mp;
+#define cy cout<<"YES"<<endl;
+#define cn cout<<"NO"<<endl;
+#define all(x) (x).begin(), (x).end()
+#define fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define pb push_back
+#define pob pop_back
+void solve(){
+    ll n,k,p;
+    cin>>n>>k>>p;
+    k=abs(k);
+    ll d=k/p;
+    if(k%p!=0){
+        d++;
+    }
+    if(d>n){
+        cout<<-1<<"\n";
+    }
+    else{
+        cout<<d<<"\n";
+    }
+}
+int main(){
+    fast;
+    int t;
+    cin>>t;
+    while (t--){
+        solve();
+    }
+}
