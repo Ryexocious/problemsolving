@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+typedef  long long ll;
 typedef vector<ll> vec;
 typedef map<string,int> mp;
 #define cy cout<<"YES"<<endl;
@@ -10,74 +10,55 @@ typedef map<string,int> mp;
 #define pb push_back
 #define pob pop_back
 void solve() {
-    ll n, c;
-    cin >> n;
-    vec v(n), v2;
+    ll n;
+    cin>>n;
+    vec v(n);
     map<ll,ll> m;
-    for (int i = 0; i < n; i++) {
-        cin >> v[i];
+    for(int i=0;i<n;i++){
+        cin>>v[i];
         m[v[i]]++;
     }
-    sort(v.begin(), v.end());
-    ll co = 0;
-    for (auto it : m) {
-        if (it.second > 1) {
-            co += it.second / 2;
-            c = it.first;
-            v2.push_back(it.first);
-        }
+    vec v2;
+    for(auto &[val,count] : m){
+        if(count>=2) v2.pb(val);
     }
-    
-    if (co > 1) {
-        if (v2.size() == 1) {
-            for (int i = 0; i < 4; i++) {
-                cout << v2[0] << " ";
-            }
-            cout << "\n";
-            return;
-        } else {
-            for (int i = 0; i < 2; i++) {
-                cout << v2[i] << " " << v2[i] << " ";
-            }
-            cout << "\n";
+    sort(all(v2));
+    for(auto &[val, count] : m){
+        if(count>=4){
+            cout<<val<<" "<<val<<" "<<val<<" "<<val<<"\n";
             return;
         }
-    } 
-    else if (co == 1) {
-        bool chk = false;
-        v2.clear();
-        for (auto it : m) {
-            if (it.second < 2 || it.second > 2) {
-                v2.push_back(it.first);
+    }
+    if(v2.size()>=2){
+        cout<<v2[0]<<" "<<v2[0]<<" "<<v2[1]<<" "<<v2[1]<<"\n";
+        return;
+    }
+    if(v2.size()==1){
+        ll c=v2[0];
+        vec v3;
+        for(auto &[val, count] : m){
+            if(val!=c || count>2) v3.pb(val);
+        }
+        sort(all(v3));
+        for(int i=1;i<v3.size();i++){
+            ll a=v3[i-1];
+            ll b=v3[i];
+            if(abs(a-b)<2*c){
+                cout<<c<<" "<<c<<" "<<a<<" "<<b<<"\n";
+                return;
             }
         }
-        sort(v2.begin(), v2.end());
-        int i = 0, j = 1;
-        while (i < v2.size()) {
-            while (j < v2.size() && v2[j] + v2[i] <= c) {
-                if (i != j) {
-                    cout << c << " " << c << " " << v2[i] << " " << v2[j] << "\n";
-                    chk = true;
-                    break;
-                }
-                j++;
-            }
-            if (chk) break;
-            i++;
-        }
-        if (!chk) {
-            cout << -1 << "\n";
-        }
+        cout<<"-1\n";
+        return;
     }
-    else {
-        cout << -1 << "\n";
-    }
+    cout<<"-1\n";
 }
-int main() {
+int main(){
     fast;
     int t;
-    cin >> t;
-    while (t--) {
+    cin>>t;
+    while (t--){
         solve();
     }
 }
+

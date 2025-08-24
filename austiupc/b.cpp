@@ -9,7 +9,6 @@ typedef map<string,int> mp;
 #define fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define pb push_back
 #define pob pop_back
-
 void solve(){
     int n;
     cin >> n;
@@ -52,7 +51,6 @@ void solve(){
     }
     cout << endl;
 }
-
 int main(){
     fast;
     int t;

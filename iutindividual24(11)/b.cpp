@@ -3,8 +3,8 @@ using namespace std;
 typedef  long long ll;
 typedef vector<ll> vec;
 typedef map<string,int> mp;
-#define cy cout<<"YES"<<endl;
-#define cn cout<<"NO"<<endl;
+#define cy cout<<"Yes"<<endl;
+#define cn cout<<"No"<<endl;
 #define all(x) (x).begin(), (x).end()
 #define fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define pb push_back

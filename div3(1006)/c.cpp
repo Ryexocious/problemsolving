@@ -29,20 +29,10 @@ void solve() {
         v.pop_back();
         v.pb(x);
     }
-    // if(v.size()==n & x3!=x){
-    //     v.pop_back();
-    //     v.pb(x);
-    // }
-    // if(v.size()<n){
-    //     v.pb(x);
-    //     for(int i=0;i<n-v.size();i++){
-    //         v.pb(0);
-    //     }
-    // }
     for (int i = 0; i < n; ++i) {
         cout << v[i] << " ";
     }
-    cout << endl;
+    cout <<"\n";
 }
 int main(){
     fast;

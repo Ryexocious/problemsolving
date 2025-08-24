@@ -1,70 +1,51 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+typedef  long long ll;
 typedef vector<ll> vec;
-#define fast ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-
-void solve() {
-    int n, m;
-    cin >> n >> m;
-
-    vector<vector<int>> grid(n, vector<int>(m));
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            cin >> grid[i][j];
+typedef map<string,int> mp;
+#define cy cout<<"YES"<<endl;
+#define cn cout<<"NO"<<endl;
+#define all(x) (x).begin(), (x).end()
+#define fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define pb push_back
+#define pob pop_back
+void solve(){
+    ll n,m;
+    cin>>n>>m;
+    map<ll,ll>m2;
+    vector<vec>v(n,vec(m,0));
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>v[i][j];
+            m2[v[i][j]]=1;
         }
     }
-
-    // If there is only one row, count the frequency of each color
-    if (n == 1) {
-        map<int, int> colorCount;
-        for (int j = 0; j < m; j++) {
-            colorCount[grid[0][j]]++;
+    for(int i=0;i<n;i++){
+        for(int j=1;j<m;j++){
+            if(v[i][j]==v[i][j-1]){
+                m2[v[i][j]]=2;
+            }
         }
-        int maxColor = 0;
-        for (auto& [color, count] : colorCount) {
-            maxColor = max(maxColor, count);
-        }
-        cout << m - maxColor << endl;
-        return;
-    }
-
-    // Create two maps to count the frequency of colors in the two groups
-    map<int, int> group1, group2;
-
-    // Fill the two groups based on the checkerboard pattern
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if ((i + j) % 2 == 0) {
-                group1[grid[i][j]]++;
-            } else {
-                group2[grid[i][j]]++;
+        if(i>0){
+            for(int k=0;k<m;k++){
+                if(v[i][k]==v[i-1][k]){
+                    m2[v[i][k]]=2;
+                }
             }
         }
     }
-
-    // Total cells in each group
-    int total1 = (n * m + 1) / 2;
-    int total2 = (n * m) / 2;
-
-    // Find the most frequent color in each group
-    int maxGroup1 = 0, maxGroup2 = 0;
-    for (auto& [color, count] : group1) {
-        maxGroup1 = max(maxGroup1, count);
+    ll res=0,mx=0;
+    for(auto it : m2){
+        res+=it.second;
+        mx=max(it.second,mx);
     }
-    for (auto& [color, count] : group2) {
-        maxGroup2 = max(maxGroup2, count);
-    }
-
-    // The minimum steps needed to paint the entire grid
-    cout << (total1 - maxGroup1) + (total2 - maxGroup2) << endl;
+    cout<<res-mx<<"\n";
 }
-
-int main() {
+int main(){
     fast;
     int t;
-    cin >> t;
-    while (t--) {
+    cin>>t;
+    while (t--){
         solve();
     }
 }
